@@ -1,0 +1,20 @@
+<html>
+<head>
+    <title>用户删除</title>
+</head>
+<body>
+{% if msg.code == 0 %}
+    <p style="color: green"> {{ msg.result }}</p>
+{% else %}
+    <p style="color: red"> {{ msg.errmsg }}</p>
+{% endif %}
+  
+<h1>你确定要删除 {{ user.name}}?</h1>
+  
+<form method="post">
+    <button type="submit">确定</button>
+    <!--定义一个超链接,使用app_name + 命名空间的方式,更加灵活,用户点击取消按钮则跳转到userlist路由中path('userlist/', views1.userlist, name="userlist"),-->
+     <button><a href="{% url 'hello:userlist' %}">取消</a></button>
+</form>
+</body>
+</html>

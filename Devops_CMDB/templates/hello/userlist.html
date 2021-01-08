@@ -1,0 +1,55 @@
+<!-- 继承母版不变的部分 -->
+{% extends "base.html" %}
+  
+<!-- 重写母版变的部分-->
+{% block title %} 用户的列表 {% endblock %}
+  
+<!-- 重写母版变的部分-->
+{% block content %}
+
+<!-- 搜索框 -->
+<form>
+    <input type="text" name="keyword" value="{{ keyword }}" placeholder="请出入关键字">
+    <button type="submit">搜索</button>
+</form>
+  
+<!--数据表格-->
+<table border="1">
+<thead>
+    <tr>
+        <th>ID</th>
+        <th>姓名</th>
+        <th>密码</th>
+        <th>性别</th>
+        <th>操作</th>
+    </tr>
+</thead>
+  
+<tbody>
+<!--遍历views1中userlist函数中传递过来的K,以及module建模时的数据库字段-->
+    {% for user in users %}
+    <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.password }}</td>
+        <td>
+            {% if user.sex == 0 %} 男
+            {% elif user.sex == 1 %} 女
+            {% else %} 未定义
+            {% endif %}
+        </td>
+        <td>
+            <!--灵活的超链接，使用后端urls.py路由中path/re_path中的name字段定义的命名空间-->
+            <!--hello:modify' : hello是在devops/hello/urls.py中app_name = 'hello'定义的, modify为helloAPP的一个路由命名空间-->
+            <!--hello:modify : 为更新操作-->
+            <a href="{% url 'hello:modify' user.id %}">更新</a>
+            
+            <a href="{% url 'hello:userdel' user.id %}">删除</a>
+            <!--不灵活的超链接方式： <a href="/hello/userdel/{{user.id}}/">删除</a>-->
+        </td>
+    </tr>
+    {% endfor %}
+  
+</tbody>
+</table>
+{% endblock %}

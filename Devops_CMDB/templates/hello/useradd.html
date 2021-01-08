@@ -1,0 +1,44 @@
+<html>
+<head>
+    <title>用户添加</title>
+</head>
+  
+<body>
+<!--前端通过判断后端的返回值msg的code变量（0为成功，1为失败），并进行后端变量返回-->
+{% if msg.code == 0 %}
+    <p style="color:green"> {{ msg.result }}</p>
+{% else %}
+    <p style="color:red"> {{ msg.errmsg }}</p>
+{% endif %}
+  
+<!--前端通过用户的POST请求进行处理
+      action含义：点击确定之后，后端哪个路由来处理，空的不写，默认就是当前的路由的模板文件处理，
+         也就是再hello/urls.py中的 path('useradd/', views_useradd.useradd, name="useradd")
+         以及后端代码中return render(request,"hello/useradd.html", {"msg":msg}) 整体来说就是当前页面处理-->
+ 
+ 
+<!-- <form method="post" action="useradd.html" > 写成这样试一试？看效果理解action，走这个页面-->
+<!-- <form method="post" action="useradd11/" > 写成这样试一试？看效果理解action，走这个路由，再找路由对应的页面-->
+<form method="post" action="" >
+    姓名：
+    <!--类型为text文本，name="name"，中的第二个name为从后端接收到的数据变量-->
+    <input type="text" name="name">
+    <br>
+    <br>
+    密码：
+    <!--类型为password，name="password"的password为从后端接收到的数据变量-->
+    <input type="password" name="password">
+    <br>
+    <br>
+    性别：
+    <!--类型为rddio单元按钮，checked:为默认的用户选项-->
+    <input type="radio" name="sex" value="0" checked>男
+    <input type="radio" name="sex" value="1">女
+    <br>
+    <br>
+    <button type="submit" >确定</button>
+    <button type="reset" >重置</button>
+</form>
+  
+</body>
+</html>

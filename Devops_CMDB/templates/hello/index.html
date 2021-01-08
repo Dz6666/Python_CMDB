@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>devops运维</title>
+</head>
+
+<form>
+    <input type="text" name="keyword" value="{{ keyword }}" placeholder="请出入关键字">
+    <button type="submit">搜索</button>
+</form>
+  
+<table border="1">
+<thead>
+    <tr>
+        <th>ID</th>
+        <th>姓名</th>
+        <th>密码</th>
+        <th>性别</th>
+        <th>操作</th>
+        </tr>
+</thead>
+   <tbody>
+    {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.password }}</td>
+            <td>{% if user.sex == 0 %} 男 {% elif user.sex == 1 %} 女 {% else %} 未定义 {% endif %}</td>
+            <td>
+                
+                <a href="/hello/userdel/{{user.id}}">删除</a>
+            </td>
+        </tr>
+    {% endfor %}
+</tbody>
+</table>
+<form method="post" action="" >
+    姓名:
+    <input type="text" name="name" >
+    <br>
+    <br>
+    密码:
+    <input type="password" name="password">
+    <br>
+    <br>
+    性别:
+    <input type="radio" name="sex" value="0" checked>男
+    <input type="radio" name="sex" value="1">女
+    <br>
+    <br>
+    <button type="submit" >确定</button>
+    <button type="reset">重置</button>
+</form>

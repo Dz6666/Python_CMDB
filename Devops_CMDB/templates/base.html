@@ -1,0 +1,19 @@
+<html>
+<head>
+    <title>自动化运维平台</title>
+</head>
+<body>
+  
+<!-- 每个页面都有个标题且样式基本不会变，可以抽象出来。变的标题内容做成变量 -->
+<p style="background-color:yellow;">
+    {% block title %} 用户列表 {% endblock %}
+</p>
+  
+<!-- 页面都内容往往是变化的这一块，做成变量即可 -->
+{% block content %}
+{% endblock %}
+  
+<!-- 每个页面都有个底部且样式基本不会变，可以抽象出来 -->
+<p style="background-color:red;">版权所有：代哲Devops</p>
+</body>
+</html>
