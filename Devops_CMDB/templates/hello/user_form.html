@@ -1,0 +1,48 @@
+<!-- 继承母版不变的部分 -->
+{% extends "base.html" %} 
+
+<!-- 重写母版变的部分-->
+{% block title %} 创建用户 {% endblock %}
+
+<!-- 重写母版变的部分-->
+{% block content %}
+
+{% if form %}
+    <p style="color:red"> {{ form }} </p>
+    <!-- <p style="color:red"> {{ form.errors }} </p> -->
+{% endif %} 
+
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<form method="post" action="" >
+    姓名:
+    <input type="text" name="name" >
+    {% if form.name %}
+    <p style="color:red"> {{ form.name.errors}} </p>    
+    {% endif %}
+    <br>
+    <br>
+    密码:
+    <input type="password" name="password">
+    {% if form.password %}
+        <p style="color:red"> {{ form.password.errors}} </p>    
+    {% endif %}
+    <br>
+    <br>
+    性别:
+    <input type="radio" name="sex" value="0" checked>男    
+    <input type="radio" name="sex" value="1">女
+    <br>
+    <br>
+
+    <input type="submit"  value="保存" name="_save">
+    <input type="submit" value="保存并增加另一个" name="_addanother">
+</form> 
+
+{% endblock %}

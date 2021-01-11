@@ -1,0 +1,43 @@
+<!-- 继承母版不变的部分 -->
+{% extends "base.html" %} 
+
+<!-- 重写母版变的部分-->
+{% block title %} 用户列表 {% endblock %}
+
+<!-- 重写母版变的部分-->
+{% block content %}
+
+<!-- 搜索框 -->
+<form action="{% url 'hello:cbvuserlist' %}">
+    <input type="text"  name="keyword"  value="{{ keyword }}" placeholder="请输入关键字"> 
+    <button type="submit">搜索</button>
+<form> 
+
+<!-- 数据表格 -->
+<table border="1">
+<thead>
+    <tr>
+        <th>ID</th>
+        <th>姓名</th>
+        <th>密码</th>
+        <th>性别</th>
+        <th>操作</th>
+    </tr>
+</thead>
+<tbody>
+    {% for user in users %}
+    <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.password }}</td>
+        <td>{% if user.sex == 0 %} 男 {% elif user.sex == 1 %}女 {% else %} 未定义 {% endif %}</td>
+        <td>
+
+         </td>
+    </tr>
+    {% endfor %}
+
+</tbody>
+</table>
+
+{% endblock %}

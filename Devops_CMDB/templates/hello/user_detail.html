@@ -1,0 +1,35 @@
+<!-- 继承母版不变的部分 -->
+{% extends "base.html" %} 
+
+<!-- 重写母版变的部分-->
+{% block title %} 更新用户 {% endblock %}
+
+<!-- 重写母版变的部分-->
+{% block content %}
+
+{% if form %}
+    <p style="color:red"> {{ form.errors}} </p>
+{% endif %}
+
+<form method="post" action="{% url "hello:cbvdetail" user.id %}" >
+    姓名:
+    <input type="text" name="name" value={{ user.name }}>
+    <br>
+    <br>
+    密码:
+    <input type="password" name="password" value={{ user.password }}>
+    <br>
+    <br>
+    手机:
+    <input type="phone" name="phone" value={{ user.phone }}>
+    <br>
+    <br>
+    性别:
+    <input type="radio" name="sex" value="0" {% if object %}{% if object.sex == 0 %} checked {% endif %}{% endif %} >男  
+    <input type="radio" name="sex" value="1" {% if object %}{% if object.sex == 1 %} checked {% endif %} {% else %}checked{% endif %} >女
+    <br>
+    <br>
+    <input type="submit"  value="保存" name="_save">
+</form> 
+
+{% endblock %}
